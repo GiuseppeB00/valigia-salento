@@ -5,103 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b7fb8">
   <title>Viaggio nel Salento — Lista valigia</title>
-  <meta name="description" content="Checklist condivisa per il viaggio nel Salento">
+  <meta name="description" content="Checklist condivisa protetta per il viaggio nel Salento">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="hero">
-    <div class="hero__inner">
-      <div>
+  <div id="loginView" class="login-shell">
+    <section class="login-card">
+      <div class="login-brand">
         <h1>VIAGGIO NEL SALENTO</h1>
-        <p>Lista controllo valigia e promemoria organizzativi</p>
-      </div>
-      <button id="syncStatus" class="sync sync--local" type="button" title="Stato sincronizzazione">Solo locale</button>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="toolbar card">
-      <div class="progress-wrap">
-        <div class="progress-head">
-          <strong id="progressText">0 / 0 completati</strong>
-          <span id="progressPercent">0%</span>
-        </div>
-        <div class="progress" aria-label="Avanzamento">
-          <div id="progressBar" class="progress__bar"></div>
-        </div>
+        <p>Lista condivisa protetta</p>
       </div>
 
-      <div class="toolbar__actions">
-        <button id="addItemBtn" class="btn btn--primary" type="button">+ Aggiungi elemento</button>
-        <button id="addCategoryBtn" class="btn" type="button">+ Nuova categoria</button>
-        <select id="filterSelect" class="select" aria-label="Filtra elementi">
-          <option value="all">Tutti</option>
-          <option value="open">Da preparare</option>
-          <option value="done">Già preparati</option>
-        </select>
-      </div>
+      <form id="loginForm" class="login-form">
+        <label for="passwordInput">Password</label>
+        <input
+          id="passwordInput"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Inserisci la password"
+          required
+        >
+        <button id="loginBtn" class="btn btn--primary btn--full" type="submit">ENTRA</button>
+        <p id="loginError" class="login-error" hidden></p>
+      </form>
     </section>
+  </div>
 
-    <div id="notice" class="notice" hidden></div>
-    <div id="listGrid" class="grid" aria-live="polite"></div>
-  </main>
-
-  <dialog id="itemDialog">
-    <form method="dialog" id="itemForm" class="dialog-form">
-      <h2 id="itemDialogTitle">Aggiungi elemento</h2>
-      <label>
-        Categoria
-        <select id="itemCategory" required></select>
-      </label>
-      <label>
-        Testo
-        <input id="itemLabel" type="text" maxlength="180" required autocomplete="off">
-      </label>
-      <div class="dialog-actions">
-        <button class="btn" value="cancel">Annulla</button>
-        <button id="saveItemBtn" class="btn btn--primary" value="default">Salva</button>
+  <div id="appView" hidden>
+    <header class="hero">
+      <div class="hero__inner">
+        <div>
+          <h1>VIAGGIO NEL SALENTO</h1>
+          <p>Lista controllo valigia e promemoria organizzativi</p>
+        </div>
+        <div class="hero__actions">
+          <button id="syncStatus" class="sync sync--online" type="button" title="Stato sincronizzazione">Connessa</button>
+          <button id="logoutBtn" class="btn btn--ghost" type="button">Esci</button>
+        </div>
       </div>
-    </form>
-  </dialog>
+    </header>
 
-  <dialog id="categoryDialog">
-    <form method="dialog" id="categoryForm" class="dialog-form">
-      <h2>Nuova categoria</h2>
-      <label>
-        Nome categoria
-        <input id="categoryName" type="text" maxlength="80" required autocomplete="off">
-      </label>
-      <div class="dialog-actions">
-        <button class="btn" value="cancel">Annulla</button>
-        <button class="btn btn--primary" value="default">Aggiungi</button>
+    <main class="container">
+      <section class="toolbar card">
+        <div class="progress-wrap">
+          <div class="progress-head">
+            <strong id="progressText">0 / 0 completati</strong>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress" aria-label="Avanzamento">
+            <div id="progressBar" class="progress__bar"></div>
+          </div>
+        </div>
+
+        <div class="toolbar__actions">
+          <button id="addItemBtn" class="btn btn--primary" type="button">+ Aggiungi elemento</button>
+          <button id="addCategoryBtn" class="btn" type="button">+ Nuova categoria</button>
+          <button id="refreshBtn" class="btn" type="button">Aggiorna</button>
+          <select id="filterSelect" class="select" aria-label="Filtra elementi">
+            <option value="all">Tutti</option>
+            <option value="open">Da preparare</option>
+            <option value="done">Già preparati</option>
+          </select>
+        </div>
+      </section>
+
+      <div id="notice" class="notice" hidden></div>
+      <div id="listGrid" class="grid" aria-live="polite"></div>
+    </main>
+
+    <dialog id="itemDialog">
+      <form method="dialog" id="itemForm" class="dialog-form">
+        <h2 id="itemDialogTitle">Aggiungi elemento</h2>
+        <label>
+          Categoria
+          <select id="itemCategory" required></select>
+        </label>
+        <label>
+          Testo
+          <input id="itemLabel" type="text" maxlength="180" required autocomplete="off">
+        </label>
+        <div class="dialog-actions">
+          <button class="btn" value="cancel">Annulla</button>
+          <button class="btn btn--primary" value="default">Salva</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="categoryDialog">
+      <form method="dialog" id="categoryForm" class="dialog-form">
+        <h2>Nuova categoria</h2>
+        <label>
+          Nome categoria
+          <input id="categoryName" type="text" maxlength="80" required autocomplete="off">
+        </label>
+        <div class="dialog-actions">
+          <button class="btn" value="cancel">Annulla</button>
+          <button class="btn btn--primary" value="default">Aggiungi</button>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="categoryTemplate">
+      <section class="category card">
+        <div class="category__head">
+          <h2></h2>
+          <button class="icon-btn category-add" type="button" title="Aggiungi elemento">+</button>
+        </div>
+        <div class="category__items"></div>
+      </section>
+    </template>
+
+    <template id="itemTemplate">
+      <div class="item">
+        <label class="item__main">
+          <input class="item__check" type="checkbox">
+          <span class="item__text"></span>
+        </label>
+        <div class="item__menu">
+          <button class="icon-btn item-edit" type="button" title="Modifica">✎</button>
+          <button class="icon-btn item-delete" type="button" title="Elimina">×</button>
+        </div>
       </div>
-    </form>
-  </dialog>
+    </template>
+  </div>
 
-  <template id="categoryTemplate">
-    <section class="category card">
-      <div class="category__head">
-        <h2></h2>
-        <button class="icon-btn category-add" type="button" title="Aggiungi elemento">+</button>
-      </div>
-      <div class="category__items"></div>
-    </section>
-  </template>
-
-  <template id="itemTemplate">
-    <div class="item">
-      <label class="item__main">
-        <input class="item__check" type="checkbox">
-        <span class="item__text"></span>
-      </label>
-      <div class="item__menu">
-        <button class="icon-btn item-edit" type="button" title="Modifica">✎</button>
-        <button class="icon-btn item-delete" type="button" title="Elimina">×</button>
-      </div>
-    </div>
-  </template>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
