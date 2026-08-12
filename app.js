@@ -3,7 +3,7 @@
   const SESSION_KEY =
     config.sessionStorageKey || "valigia-salento-session-v1";
 
-  const AUTO_REFRESH_MS = 30000;
+  const AUTO_REFRESH_MS = 60000;
 
   const els = {
     loginView: document.getElementById("loginView"),
